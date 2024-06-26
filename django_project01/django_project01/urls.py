@@ -22,4 +22,8 @@ urlpatterns = [
     
     # www.xxx.com/index/ -> app01 views里的index函数
 	path("index/", views.index),
+
+    path("users/list/", views.user_list),
+
+    path("users/add/", views.user_add),
 ]
