@@ -26,4 +26,6 @@ urlpatterns = [
     path("users/list/", views.user_list),
 
     path("users/add/", views.user_add),
+
+    path("tpl/", views.tpl),
 ]

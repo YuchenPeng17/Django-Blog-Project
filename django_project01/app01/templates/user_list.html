@@ -1,11 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- load static files -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.css' %}">
 </head>
 <body>
     <h1>User List</h1>
+    <img src="{% static 'img/1.png' %}" alt="" />
+    <input type="text" class="btn btn-primary" value="点击">
 </body>
 </html>
