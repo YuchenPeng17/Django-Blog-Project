@@ -6,14 +6,43 @@
     <title>模版语法的学习 / Template Syntax</title>
 </head>
 <body>
+    <!-- normal variable -->
     <h3>{{ name }}</h3>
     <h4>{{ comment }}</h4>
+    <hr>
+
+    <!-- array, list -->
     <ul>
     {% for item in role %}
         <li>{{ item }}</li>
     {% endfor %}
     </ul>
-    
+    <hr>
+
+    <!-- object -->
+    <!-- user_info.keys; user_info.values; user_info.items -->
+    {% for key,value in user_info.items %}
+        <li>{{ key }} = {{ value }}</li>
+    {% endfor %}
+    <hr>
+
+    <!-- objects in array -->
+     <div>{{ data_list.2.name }}</div>
+     {% for item in data_list %}
+        <div>
+            <span>{{item.name}} with {{item.salary}} is {{item.role}}</span>
+        </div>
+     {% endfor %}
+     <hr>
+
+     <!-- conditinal statements -->
+      {% if name == "Yuchen" %}
+      <h1>If Yes</h1>
+      {% elif name == "Yovan" %}
+      <h1>If No Sure</h1>
+      {% else %}
+      <h1>If No</h1>
+      {% endif %}
 
 </body>
 </html>

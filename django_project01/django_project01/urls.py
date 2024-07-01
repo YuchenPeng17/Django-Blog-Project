@@ -27,5 +27,12 @@ urlpatterns = [
 
     path("users/add/", views.user_add),
 
+    # 模版语法
     path("tpl/", views.tpl),
+
+    # 请求与响应
+    path("something/", views.something),
+
+    # 案例：用户登陆
+    path("login/", views.login),
 ]
