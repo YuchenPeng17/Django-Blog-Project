@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from app01 import models
 
 # Create your views here.
 
@@ -81,7 +82,6 @@ def login(request):
     
     return render(request, "login.html", {"error": "Wrong username or password"})
 
-from app01 import models
 def orm(request):
     # Test ORM CRUD
 
@@ -109,4 +109,31 @@ def orm(request):
 
     return HttpResponse("Success")
 
+def info_list(request):
+    # 1. Get All Users Info from Database
+    data_list = models.UserInfo.objects.all()
 
+
+    return render(request, "info_list.html", {
+        "data_list": data_list,}
+        )
+
+def info_add(request):
+    # 1. If receive a GET request
+    if request.method == "GET":
+        return render(request, "info_add.html")
+    # 2. Receuve a POST request
+    username = request.POST.get("user")
+    password = request.POST.get("pwd")
+    age = request.POST.get("age")
+    address = request.POST.get("address")
+    models.UserInfo.objects.create(name=username, password=password, age=age, address=address)
+    return redirect("/info/list")
+
+def info_delete(request):
+    # 1. Get the id of the user to delete
+    nid = request.GET.get("nid")
+    # 2. Delete the user
+    models.UserInfo.objects.filter(id=nid).delete()
+    # 3. Redirect to user list page
+    return redirect("/info/list")
