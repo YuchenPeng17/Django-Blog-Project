@@ -81,3 +81,32 @@ def login(request):
     
     return render(request, "login.html", {"error": "Wrong username or password"})
 
+from app01 import models
+def orm(request):
+    # Test ORM CRUD
+
+    # 1. CREATE
+    models.Department.objects.create(title='Sales')
+    models.Department.objects.create(title='Marketing')
+    models.UserInfo.objects.create(name='Yovan', password='123456', age=23, address='Shanghai')
+    models.UserInfo.objects.create(name='Arial', password='456789', age=24, address='Guangzhou')
+
+    # 2. DELETE
+    models.Department.objects.filter(id='3').delete()          # filter() 筛选
+    models.Department.objects.all().delete()                   # all() 全选
+
+    # 3. READ
+    user_list = models.UserInfo.objects.all()
+    for user in user_list:
+        print(user.id, user.name, user.age, user.address)
+    
+    user_query_list = models.UserInfo.objects.filter(id="1")  # retuen query list
+    user_obj = models.UserInfo.objects.filter(id="1").first() # if only one object, user first
+
+    # 4. UPDATE
+    models.UserInfo.objects.all().update(password="999999")
+    models.UserInfo.objects.filter(id="1").update(password="889911")
+
+    return HttpResponse("Success")
+
+

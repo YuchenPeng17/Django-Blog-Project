@@ -35,4 +35,8 @@ urlpatterns = [
 
     # 案例：用户登陆
     path("login/", views.login),
+
+    # ORM
+    path("orm/", views.orm),
+
 ]
