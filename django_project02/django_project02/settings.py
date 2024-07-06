@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # sign up
-    "app01.app.App01Config"
+    "app01.apps.App01Config"
 ]
 
 MIDDLEWARE = [
@@ -78,8 +78,12 @@ WSGI_APPLICATION = "django_project02.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "DJANGO_DAY2",
+        "USER": "root",
+        "PASSWORD": "cc20010712",
+        "HOST": "localhost",  # This should be the hostname, typically 'localhost' for local MySQL server
+        "PORT": "3306",  # This should be the port number, typically '3306' for MySQL
     }
 }
 
