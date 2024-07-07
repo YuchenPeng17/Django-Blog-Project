@@ -7,7 +7,6 @@ def depart_list(request):
 
     return render(request, 'depart_list.html', {'department_list': department_list_db})
 
-
 def depart_add(request):
     if request.method == 'GET':
         return render(request, 'depart_add.html')
@@ -17,7 +16,6 @@ def depart_add(request):
     models.Department.objects.create(title=depart_to_add)
     return redirect('/depart/list/')
 
-
 def depart_delete(request):
     # /depart/delete/?id=1
     # get the id from the url
@@ -25,4 +23,13 @@ def depart_delete(request):
     
     # delete
     models.Department.objects.filter(id=nid).delete()
+    return redirect('/depart/list/')
+
+def depart_edit(request, nid):
+    if request.method == 'GET':
+        departName_db = models.Department.objects.filter(id=nid).first().title
+        return render (request, 'depart_edit.html', {"departName": departName_db})
+    
+    new_depart_name = request.POST.get('DepartmentName')
+    models.Department.objects.filter(id=nid).update(title=new_depart_name)
     return redirect('/depart/list/')
