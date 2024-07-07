@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.css' %}" />
+</head>
+<body>
+    <!-- navigation  -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#"> Yovan Department Management System </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Department Management</a></li>
+              <li><a href="#">[PlaceHolder]</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Link</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Profile</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Sign Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div style="margin: 15px 0px;">
+            <a class="btn btn-primary btn-success" href="/depart/add/">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Add Department</a>
+        </div>
+
+        <div class="bs-example" data-example-id="table-within-panel">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                Department List
+            </div>
+        
+              <!-- Table -->
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Modification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>Finance</td>
+                        <td>
+                            <a class="btn btn-primary">Edit</a>
+                            <a class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% for department_object in department_list %}
+                    <tr>
+                        <td>{{ department_object.id }}</td>
+                        <td>{{ department_object.title }}</td>
+                        <td>
+                            <a class="btn btn-primary">Edit</a>
+                            <a class="btn btn-danger" href="/depart/delete/?nid={{department_object.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+    </div>
+
+
+    <script src="{% static 'plugins/jquery/jquery-3.7.1.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.js' %}"></script>
+</body>
+</html>
