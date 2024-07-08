@@ -20,11 +20,16 @@ from app01 import views
 
 urlpatterns = [
     # path("admin/", admin.site.urls),
+    path("index/", views.index),
 
+    # Department
     path("depart/list/", views.depart_list),
     path("depart/add/", views.depart_add),
     path("depart/delete/", views.depart_delete),
-
-    # http://127.0.0.1:8000/depart/5/edit/
     path("depart/<int:nid>/edit/", views.depart_edit),
+
+    # User
+    path("user/list/", views.user_list),
+
+
 ]

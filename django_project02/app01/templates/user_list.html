@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div style="margin: 15px 0px;">
+        <a class="btn btn-primary btn-success" href="/user/add/">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Add User</a>
+    </div>
+
+    <div class="bs-example" data-example-id="table-within-panel">
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            User List
+        </div>
+    
+          <!-- Table -->
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Age</th>
+                <th>Account Balance</th>
+                <th>Create Time</th>
+                <th>Gender</th>
+                <th>Department</th>
+                <th>Modification</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>
+                        <a class="btn btn-primary">Edit</a>
+                        <a class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% for user_object in user_list %}
+                <tr>
+                    <td>{{ user_object.id }}</td>
+                    <td>{{ user_object.name }}</td>
+                    <td>{{ user_object.password }}</td>
+                    <td>{{ user_object.age }}</td>
+                    <td>{{ user_object.account }}</td>                    
+                    <td>{{ user_object.create_time}}</td>
+                    <td>{{ user_object.gender }}</td>
+                    <td>{{ user_object.depart_id }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/depart/{{department_object.id}}/edit/">Edit</a>
+                        <a class="btn btn-danger" href="/depart/delete/?nid={{department_object.id}}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>
+{% endblock %}
