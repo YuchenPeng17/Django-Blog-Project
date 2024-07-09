@@ -6,6 +6,11 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Add User</a>
     </div>
+    <div style="margin: 15px 0px;">
+      <a class="btn btn-primary btn-success" href="/user/model/form/add/">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Add User Model Form</a>
+  </div>
 
     <div class="bs-example" data-example-id="table-within-panel">
         <div class="panel panel-default">
@@ -31,20 +36,6 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>
-                        <a class="btn btn-primary">Edit</a>
-                        <a class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
                 {% for user_object in user_list %}
                 <tr>
                     <td>{{ user_object.id }}</td>

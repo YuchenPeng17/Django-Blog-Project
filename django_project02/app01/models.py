@@ -6,6 +6,9 @@ class Department(models.Model):
     id = models.BigAutoField(verbose_name="ID", primary_key=True)
     title = models.CharField(verbose_name= "标题",max_length=32)
 
+    def __str__(self):
+        return self.title
+
 """ Staff Table"""
 class UserInfo(models.Model):
     name = models.CharField(verbose_name="姓名",max_length=32)
@@ -28,8 +31,8 @@ class UserInfo(models.Model):
     
     # Django Restriction
     gender_choices = (
-        (1,"男"),
-        (2,"女")
+        (1,"Male"),
+        (2,"Female")
         )
     gender = models.SmallIntegerField(verbose_name="性别",choices=gender_choices)
 
