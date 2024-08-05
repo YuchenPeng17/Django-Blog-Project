@@ -17,7 +17,7 @@ def article_content(request):
 
 from django.core.paginator import Paginator
 def get_index_page(request):
-    # Get Page ID
+    # Get Page ID from URL
     page = request.GET.get("page")
     if page:
         page = int(page)
@@ -25,15 +25,23 @@ def get_index_page(request):
         page = 1
 
     all_articles = Article.objects.all()
-    top5_article_list = Article.objects.order_by('-published_date')[:10]
     paginator = Paginator(all_articles, 3)
-    number_of_pages = paginator.num_pages
-    page_article_list = paginator.page(page)
-    if page_article_list.has_next():
+    """
+    Paginator is a class in Django that facilitates pagination of a dataset.
+    Args:
+        1st Parm (QuerySet or list): The collection of items you want to paginate.
+        2nd Parm (int): The number of items to display on each page.
+    """
+    number_of_pages = paginator.num_pages       # Get how many pages are there
+    page_article_list = paginator.page(page)    # Get the content in current page
+    top5_article_list = Article.objects.order_by('-published_date')[:10]    # Get the top 10 newest articles
+                                                                            # order_by(ATTRIBUTE)
+
+    if page_article_list.has_next():            # if there is next page
         next_page = page + 1
     else:
         next_page = page
-    if page_article_list.has_previous():
+    if page_article_list.has_previous():        # if there is previous page
         previous_page = page - 1
     else:
         previous_page = page
@@ -46,7 +54,7 @@ def get_index_page(request):
                                           'top5_article_list': top5_article_list,
                                           })
 
-
+# Get information for an Article in the blog
 def get_detail_page(request, article_id):
     # article = Article.objects.get(pk=article_id)
     all_articles = Article.objects.all()
@@ -56,6 +64,7 @@ def get_detail_page(request, article_id):
     next_article = None
     next_article_index = 0
 
+    # enumerate： automatically provides an index alongside each element of the iterable pass in
     for index, article in enumerate(all_articles):
         if index == 0:
             previous_article_index = 0
