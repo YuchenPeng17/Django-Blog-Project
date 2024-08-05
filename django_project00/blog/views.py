@@ -14,3 +14,66 @@ def article_content(request):
     published_date = article.published_date
     return_str = "title:%s, abstract:%s, content:%s, article_id:%s, published_date:%s" % (title, abstract, content, article_id, published_date)
     return HttpResponse(return_str)
+
+from django.core.paginator import Paginator
+def get_index_page(request):
+    # Get Page ID
+    page = request.GET.get("page")
+    if page:
+        page = int(page)
+    else:
+        page = 1
+
+    all_articles = Article.objects.all()
+    top5_article_list = Article.objects.order_by('-published_date')[:10]
+    paginator = Paginator(all_articles, 3)
+    number_of_pages = paginator.num_pages
+    page_article_list = paginator.page(page)
+    if page_article_list.has_next():
+        next_page = page + 1
+    else:
+        next_page = page
+    if page_article_list.has_previous():
+        previous_page = page - 1
+    else:
+        previous_page = page
+    
+    return render(request, "index.html", {"article_list": page_article_list,
+                                          "number_of_pages": range(1, number_of_pages+1),
+                                          'current_page': page,
+                                          'previous_page': previous_page,
+                                          'next_page': next_page,
+                                          'top5_article_list': top5_article_list,
+                                          })
+
+
+def get_detail_page(request, article_id):
+    # article = Article.objects.get(pk=article_id)
+    all_articles = Article.objects.all()
+    current_article = None
+    previous_article = None
+    previous_article_index = 0
+    next_article = None
+    next_article_index = 0
+
+    for index, article in enumerate(all_articles):
+        if index == 0:
+            previous_article_index = 0
+            next_article_index = index + 1
+        elif index == len(all_articles) - 1:
+            next_article_index = 0
+            previous_article_index = index - 1
+        else:
+            previous_article_index = index - 1
+            next_article_index = index + 1
+
+        if article.article_id == article_id:
+            current_article = article
+            previous_article = all_articles[previous_article_index]
+            next_article = all_articles[next_article_index]
+            break
+
+    return render(request, "article.html", {"current_article": current_article,
+                                            "previous_article": previous_article,
+                                            "next_article": next_article,
+                                            })
